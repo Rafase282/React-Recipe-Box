@@ -1,0 +1,153 @@
+var RecipeBox = React.createClass({
+  getInitialState: function() {
+    return {recipes: []}
+  },
+  render: function() {
+    return <section className="container-fluid">
+      <Header/>
+      <main className="page-content">
+        <RecipeList recipes={this.state.recipes}/>
+        <RecipeForm/>
+      </main>
+      <Footer/>
+    </section>
+  }
+});
+
+var RecipeList = React.createClass({
+  render: function() {
+    return <aside className="recipleList">
+      <h1 className="center">List</h1>
+      <div className="row">
+        <div className=" col s12 m4 l4">
+          <Recipe/>
+        </div>
+      </div>
+    </aside>
+  }
+});
+
+var RecipeForm = React.createClass({
+  getInitialState: function() {
+    return {title: '', img: 'http://www.gaspars.com/assets/gaspar-recipe-box3.jpg?w=297', content: ''}
+  },
+  onChange: function(key, e) {
+    console.log(key);
+    this.setState({key: e.target.value})
+  },
+  render: function() {
+    return <aside>
+      <a className="modal-trigger waves-effect waves-light btn" href="#modal1">Add Recipe</a>
+      <div id="modal1" className="modal modal-fixed-footer">
+        <div className="modal-content">
+          <h4>Add Recipe</h4>
+          <div className="row">
+            <form className="col s12" onSubmit={this.handleSubmit}>
+              <div className="row">
+                <div className="input-field col s6">
+                  <i className="material-icons prefix">label_outline</i>
+                  <input id="icon_prefix" type="text" className="validate" onChange={'title',
+                  this.onChange} value={this.state.title}/>
+                  <label htmlFor="icon_prefix">Recipe Title</label>
+                </div>
+                <div className="input-field col s6">
+                  <i className="material-icons prefix">perm_media</i>
+                  <input id="icon_telephone" type="tel" className="validate" onChange={'img',
+                  this.onChange} value={this.state.url}/>
+                  <label htmlFor="icon_telephone">Recipe Image</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">mode_edit</i>
+                  <textarea id="icon_prefix2" className="materialize-textarea" onChange={'content',
+                  this.onChange} value={this.state.content}></textarea>
+                  <label htmlFor="icon_prefix2">Recipe</label>
+                </div>
+              </div>
+              <button className="btn">Create</button>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <a className="modal-action modal-close waves-effect waves-green btn btn-flat ">Close</a>
+        </div>
+      </div>
+    </aside>
+  }
+});
+
+var Header = React.createClass({
+  render: function() {
+    return <header className="page-header center-align">
+      <nav>
+        <div className="nav-wrapper">
+          <a href="#" className="brand-logo center">Recipe Box</a>
+        </div>
+      </nav>
+    </header>
+  }
+});
+
+var Footer = React.createClass({
+  render: function() {
+    return <footer className="page-footer center-align">
+      <div className="footer-copyright">
+        <div className="container">
+          Copyright &copy; Rafael J. Rodriguez 2016. All Rights Reserved
+          <a className="grey-text text-lighten-4 right" href="http://rafase282.github.io/">Portfolio</a>
+        </div>
+      </div>
+      <p>
+        <a href="mailto:rafase282@gmail.com">
+          <i className="fa fa-envelope fa-fw"></i>
+        </a>
+        <a href="https://github.com/Rafase282" target='_blank'>
+          <i className="fa fa-github fa-fw"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rafase282" target='_blank'>
+          <i className="fa fa-linkedin"></i>&nbsp;
+        </a>
+        <a href="http://codepen.io/Rafase282" target='_blank'>
+          <i className="fa fa-codepen"></i>&nbsp;
+        </a>
+        <a href="https://rafase282.wordpress.com/" target='_blank'>
+          <i className="fa fa-wordpress"></i>&nbsp;
+        </a>
+        <a href="http://www.freecodecamp.com/rafase282" target='_blank'>
+          (<i className="fa fa-fire fa-fw"></i>)
+        </a>
+      </p>
+      <br/>
+    </footer>
+  }
+});
+
+var Recipe = React.createClass({
+  render: function() {
+    return <div className="card small">
+      <div className="card-image waves-effect waves-block waves-light">
+        <img className="activator" src="http://materializecss.com/images/office.jpg"/>
+      </div>
+      <div className="card-content">
+        <span className="card-title activator grey-text text-darken-4">Card Title<i className="material-icons right">more_vert</i>
+        </span>
+        <p>
+          <a href="#">This is a link</a>
+        </p>
+      </div>
+      <div className="card-reveal">
+        <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i>
+        </span>
+        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      </div>
+    </div>
+  }
+});
+ReactDOM.render(
+  <RecipeBox/>, document.getElementById('content'));
+
+$(document).ready(function() {
+
+  $('.modal-trigger').leanModal();
+});
