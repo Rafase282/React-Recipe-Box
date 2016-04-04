@@ -47,6 +47,93 @@ var RecipeBox = React.createClass({
     }
 });
 
+var Header = React.createClass({
+    render: function() {
+        return <header className="page-header center-align">
+            <nav>
+                <div className="nav-wrapper light-blue darken-4">
+                    <a className="brand-logo center">Recipe Box</a>
+                </div>
+            </nav>
+        </header>
+    }
+});
+
+var Footer = React.createClass({
+    render: function() {
+        return <footer className="page-footer center-align light-blue darken-4">
+            <FooterInfo/>
+            <FooterCopyright/>
+        </footer>
+    }
+});
+
+var FooterCopyright = React.createClass({
+    render: function() {
+        return <div className="footer-copyright">
+            <div className="container center-align">
+                Copyright &copy; &nbsp;
+                <a className="grey-text text-lighten-4" href="http://rafase282.github.io/">Rafael J. Rodriguez</a>
+                &nbsp; 2016. All Rights Reserved
+            </div>
+        </div>
+    }
+});
+
+var FooterInfo = React.createClass({
+    render: function() {
+        return <div className="container">
+            <div className="row">
+                <div className="col l6 s12">
+                    <h5 className="white-text">Footer Content</h5>
+                    <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div className="col l4 offset-l2 s12">
+                    <h5 className="white-text">Links</h5>
+                    <div className="col s6">
+                        <ul className="white-text">
+                            <li>
+                                <a href="mailto:rafase282@gmail.com">
+                                    <i className="fa fa-envelope fa-fw"></i>
+                                </a>&nbsp; E-Mail
+                            </li>
+                            <li>
+                                <a href="https://github.com/Rafase282" target='_blank'>
+                                    <i className="fa fa-github fa-fw"></i>
+                                </a>&nbsp; Github
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/rafase282" target='_blank'>
+                                    <i className="fa fa-linkedin"></i>
+                                </a>&nbsp; LinkedIn
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col s6">
+                        <ul className="white-text">
+                            <li>
+                                <a href="http://codepen.io/Rafase282" target='_blank'>
+                                    <i className="fa fa-codepen"></i>
+                                </a>&nbsp; Codepen
+                            </li>
+                            <li>
+                                <a href="https://rafase282.wordpress.com/" target='_blank'>
+                                    <i className="fa fa-wordpress"></i>
+                                </a>&nbsp; Wordpress
+                            </li>
+                            <li>
+                                <a href="http://www.freecodecamp.com/rafase282" target='_blank'>
+                                    (<i className="fa fa-fire fa-fw"></i>)
+                                </a>&nbsp; FreeCodeCamp
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+});
+
 var RecipeForm = React.createClass({
     getInitialState: function() {
         return {title: '', url: '', content: ''};
@@ -152,93 +239,6 @@ var Recipe = React.createClass({
                         <i className="material-icons right">close</i>
                     </span>
                     <div className="parsed flow-text" dangerouslySetInnerHTML={this.rawMarkup()}></div>
-                </div>
-            </div>
-        </div>
-    }
-});
-
-var Header = React.createClass({
-    render: function() {
-        return <header className="page-header center-align">
-            <nav>
-                <div className="nav-wrapper light-blue darken-4">
-                    <a className="brand-logo center">Recipe Box</a>
-                </div>
-            </nav>
-        </header>
-    }
-});
-
-var Footer = React.createClass({
-    render: function() {
-        return <footer className="page-footer center-align light-blue darken-4">
-            <FooterInfo/>
-            <FooterCopyright/>
-        </footer>
-    }
-});
-
-var FooterCopyright = React.createClass({
-    render: function() {
-        return <div className="footer-copyright">
-            <div className="container center-align">
-                Copyright &copy; &nbsp;
-                <a className="grey-text text-lighten-4" href="http://rafase282.github.io/">Rafael J. Rodriguez</a>
-                &nbsp; 2016. All Rights Reserved
-            </div>
-        </div>
-    }
-});
-
-var FooterInfo = React.createClass({
-    render: function() {
-        return <div className="container">
-            <div className="row">
-                <div className="col l6 s12">
-                    <h5 className="white-text">Footer Content</h5>
-                    <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                </div>
-                <div className="col l4 offset-l2 s12">
-                    <h5 className="white-text">Links</h5>
-                    <div className="col s6">
-                        <ul className="white-text">
-                            <li>
-                                <a href="mailto:rafase282@gmail.com">
-                                    <i className="fa fa-envelope fa-fw"></i>
-                                </a>&nbsp; E-Mail
-                            </li>
-                            <li>
-                                <a href="https://github.com/Rafase282" target='_blank'>
-                                    <i className="fa fa-github fa-fw"></i>
-                                </a>&nbsp; Github
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/rafase282" target='_blank'>
-                                    <i className="fa fa-linkedin"></i>
-                                </a>&nbsp; LinkedIn
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="col s6">
-                        <ul className="white-text">
-                            <li>
-                                <a href="http://codepen.io/Rafase282" target='_blank'>
-                                    <i className="fa fa-codepen"></i>
-                                </a>&nbsp; Codepen
-                            </li>
-                            <li>
-                                <a href="https://rafase282.wordpress.com/" target='_blank'>
-                                    <i className="fa fa-wordpress"></i>
-                                </a>&nbsp; Wordpress
-                            </li>
-                            <li>
-                                <a href="http://www.freecodecamp.com/rafase282" target='_blank'>
-                                    (<i className="fa fa-fire fa-fw"></i>)
-                                </a>&nbsp; FreeCodeCamp
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

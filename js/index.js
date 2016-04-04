@@ -53,6 +53,181 @@ var RecipeBox = React.createClass({
     }
 });
 
+var Header = React.createClass({
+    displayName: 'Header',
+
+    render: function render() {
+        return React.createElement(
+            'header',
+            { className: 'page-header center-align' },
+            React.createElement(
+                'nav',
+                null,
+                React.createElement(
+                    'div',
+                    { className: 'nav-wrapper light-blue darken-4' },
+                    React.createElement(
+                        'a',
+                        { className: 'brand-logo center' },
+                        'Recipe Box'
+                    )
+                )
+            )
+        );
+    }
+});
+
+var Footer = React.createClass({
+    displayName: 'Footer',
+
+    render: function render() {
+        return React.createElement(
+            'footer',
+            { className: 'page-footer center-align light-blue darken-4' },
+            React.createElement(FooterInfo, null),
+            React.createElement(FooterCopyright, null)
+        );
+    }
+});
+
+var FooterCopyright = React.createClass({
+    displayName: 'FooterCopyright',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            { className: 'footer-copyright' },
+            React.createElement(
+                'div',
+                { className: 'container center-align' },
+                'Copyright ©  ',
+                React.createElement(
+                    'a',
+                    { className: 'grey-text text-lighten-4', href: 'http://rafase282.github.io/' },
+                    'Rafael J. Rodriguez'
+                ),
+                '  2016. All Rights Reserved'
+            )
+        );
+    }
+});
+
+var FooterInfo = React.createClass({
+    displayName: 'FooterInfo',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            { className: 'container' },
+            React.createElement(
+                'div',
+                { className: 'row' },
+                React.createElement(
+                    'div',
+                    { className: 'col l6 s12' },
+                    React.createElement(
+                        'h5',
+                        { className: 'white-text' },
+                        'Footer Content'
+                    ),
+                    React.createElement(
+                        'p',
+                        { className: 'grey-text text-lighten-4' },
+                        'You can use rows and columns here to organize your footer content.'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col l4 offset-l2 s12' },
+                    React.createElement(
+                        'h5',
+                        { className: 'white-text' },
+                        'Links'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'col s6' },
+                        React.createElement(
+                            'ul',
+                            { className: 'white-text' },
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'mailto:rafase282@gmail.com' },
+                                    React.createElement('i', { className: 'fa fa-envelope fa-fw' })
+                                ),
+                                '  E-Mail'
+                            ),
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'https://github.com/Rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-github fa-fw' })
+                                ),
+                                '  Github'
+                            ),
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'https://www.linkedin.com/in/rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-linkedin' })
+                                ),
+                                '  LinkedIn'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'col s6' },
+                        React.createElement(
+                            'ul',
+                            { className: 'white-text' },
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'http://codepen.io/Rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-codepen' })
+                                ),
+                                '  Codepen'
+                            ),
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'https://rafase282.wordpress.com/', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-wordpress' })
+                                ),
+                                '  Wordpress'
+                            ),
+                            React.createElement(
+                                'li',
+                                null,
+                                React.createElement(
+                                    'a',
+                                    { href: 'http://www.freecodecamp.com/rafase282', target: '_blank' },
+                                    '(',
+                                    React.createElement('i', { className: 'fa fa-fire fa-fw' }),
+                                    ')'
+                                ),
+                                '  FreeCodeCamp'
+                            )
+                        )
+                    )
+                )
+            )
+        );
+    }
+});
+
 var RecipeForm = React.createClass({
     displayName: 'RecipeForm',
 
@@ -271,181 +446,6 @@ var Recipe = React.createClass({
                         )
                     ),
                     React.createElement('div', { className: 'parsed flow-text', dangerouslySetInnerHTML: this.rawMarkup() })
-                )
-            )
-        );
-    }
-});
-
-var Header = React.createClass({
-    displayName: 'Header',
-
-    render: function render() {
-        return React.createElement(
-            'header',
-            { className: 'page-header center-align' },
-            React.createElement(
-                'nav',
-                null,
-                React.createElement(
-                    'div',
-                    { className: 'nav-wrapper light-blue darken-4' },
-                    React.createElement(
-                        'a',
-                        { className: 'brand-logo center' },
-                        'Recipe Box'
-                    )
-                )
-            )
-        );
-    }
-});
-
-var Footer = React.createClass({
-    displayName: 'Footer',
-
-    render: function render() {
-        return React.createElement(
-            'footer',
-            { className: 'page-footer center-align light-blue darken-4' },
-            React.createElement(FooterInfo, null),
-            React.createElement(FooterCopyright, null)
-        );
-    }
-});
-
-var FooterCopyright = React.createClass({
-    displayName: 'FooterCopyright',
-
-    render: function render() {
-        return React.createElement(
-            'div',
-            { className: 'footer-copyright' },
-            React.createElement(
-                'div',
-                { className: 'container center-align' },
-                'Copyright ©  ',
-                React.createElement(
-                    'a',
-                    { className: 'grey-text text-lighten-4', href: 'http://rafase282.github.io/' },
-                    'Rafael J. Rodriguez'
-                ),
-                '  2016. All Rights Reserved'
-            )
-        );
-    }
-});
-
-var FooterInfo = React.createClass({
-    displayName: 'FooterInfo',
-
-    render: function render() {
-        return React.createElement(
-            'div',
-            { className: 'container' },
-            React.createElement(
-                'div',
-                { className: 'row' },
-                React.createElement(
-                    'div',
-                    { className: 'col l6 s12' },
-                    React.createElement(
-                        'h5',
-                        { className: 'white-text' },
-                        'Footer Content'
-                    ),
-                    React.createElement(
-                        'p',
-                        { className: 'grey-text text-lighten-4' },
-                        'You can use rows and columns here to organize your footer content.'
-                    )
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'col l4 offset-l2 s12' },
-                    React.createElement(
-                        'h5',
-                        { className: 'white-text' },
-                        'Links'
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'col s6' },
-                        React.createElement(
-                            'ul',
-                            { className: 'white-text' },
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'mailto:rafase282@gmail.com' },
-                                    React.createElement('i', { className: 'fa fa-envelope fa-fw' })
-                                ),
-                                '  E-Mail'
-                            ),
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'https://github.com/Rafase282', target: '_blank' },
-                                    React.createElement('i', { className: 'fa fa-github fa-fw' })
-                                ),
-                                '  Github'
-                            ),
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'https://www.linkedin.com/in/rafase282', target: '_blank' },
-                                    React.createElement('i', { className: 'fa fa-linkedin' })
-                                ),
-                                '  LinkedIn'
-                            )
-                        )
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'col s6' },
-                        React.createElement(
-                            'ul',
-                            { className: 'white-text' },
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'http://codepen.io/Rafase282', target: '_blank' },
-                                    React.createElement('i', { className: 'fa fa-codepen' })
-                                ),
-                                '  Codepen'
-                            ),
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'https://rafase282.wordpress.com/', target: '_blank' },
-                                    React.createElement('i', { className: 'fa fa-wordpress' })
-                                ),
-                                '  Wordpress'
-                            ),
-                            React.createElement(
-                                'li',
-                                null,
-                                React.createElement(
-                                    'a',
-                                    { href: 'http://www.freecodecamp.com/rafase282', target: '_blank' },
-                                    '(',
-                                    React.createElement('i', { className: 'fa fa-fire fa-fw' }),
-                                    ')'
-                                ),
-                                '  FreeCodeCamp'
-                            )
-                        )
-                    )
                 )
             )
         );
