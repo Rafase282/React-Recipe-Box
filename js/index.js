@@ -180,7 +180,14 @@ var FooterInfo = React.createClass({
                             },
                             'Materialize'
                         ),
-                        '. Also useful for taking notes.'
+                        '.'
+                    ),
+                    ' ',
+                    React.createElement(
+                        'p', {
+                            className: 'grey-text text-lighten-4'
+                        },
+                        'The site uses locl sotarage to keep changes in the client\'s cache. If you delete your browser\'s temp files then youw ill lose your recipes. The app is also useful for taking notes.'
                     )
                 ),
                 React.createElement(

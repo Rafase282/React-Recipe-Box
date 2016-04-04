@@ -90,7 +90,8 @@ var FooterInfo = React.createClass({
                         <a className="grey-text" href="http://freecodecamp.com" taget="_blank">FreeCodeCamp</a>, created and designed by
                         <a className="grey-text" href="https://gitter.im/Rafase282" taget="_blank">Rafase282</a>
                         using
-                        <a className="grey-text" href="http://materializecss.com/" taget="_blank">Materialize</a>. Also useful for taking notes.</p>
+                        <a className="grey-text" href="http://materializecss.com/" taget="_blank">Materialize</a>.</p>
+                    <p className="grey-text text-lighten-4">The site uses locl sotarage to keep changes in the client's cache. If you delete your browser's temp files then youw ill lose your recipes. The app is also useful for taking notes.</p>
                 </div>
                 <div className="col l4 offset-l2 s12">
                     <h5 className="white-text">Contact Me</h5>
