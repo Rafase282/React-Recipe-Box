@@ -85,11 +85,15 @@ var FooterInfo = React.createClass({
         return <div className="container">
             <div className="row">
                 <div className="col l6 s12">
-                    <h5 className="white-text">Footer Content</h5>
-                    <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <h5 className="white-text">About the Site</h5>
+                    <p className="grey-text text-lighten-4">This project is part of the React curriculum at
+                        <a className="grey-text" href="http://freecodecamp.com" taget="_blank">FreeCodeCamp</a>, created and designed by
+                        <a className="grey-text" href="https://gitter.im/Rafase282" taget="_blank">Rafase282</a>
+                        using
+                        <a className="grey-text" href="http://materializecss.com/" taget="_blank">Materialize</a>. Also useful for taking notes.</p>
                 </div>
                 <div className="col l4 offset-l2 s12">
-                    <h5 className="white-text">Links</h5>
+                    <h5 className="white-text">Contact Me</h5>
                     <div className="col s6">
                         <ul className="white-text">
                             <li>
