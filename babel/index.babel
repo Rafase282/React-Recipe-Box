@@ -1,43 +1,51 @@
 var RecipeBox = React.createClass({
   getInitialState: function() {
-    return {recipes: []}
+    return {recipes: [{title: 'Quinoa with Asian Flavors', url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg', content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'}, {title: 'Simple Lemon Herb Chicken', url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg', content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'}, {title: 'Greek Zoodle Salad', url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg', content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'}]}
+  },
+  addRecipe: function (newRecipe) {
+    var newState = Object.assign({}, this.state);
+    newState.recipes = newState.recipes.concat(newRecipe);
+    this.setState(newState);
+  },
+  delRecipe: function (index) {
+    var newState = Object.assign({}, this.state);
+    newState.recipes.splice(index, 1)
+    this.setState(newState);
   },
   render: function() {
     return <section className="container-fluid">
       <Header/>
       <main className="page-content">
-        <RecipeList recipes={this.state.recipes}/>
-        <RecipeForm/>
+        <RecipeList recipes={this.state.recipes} onDelete={this.delRecipe}/>
+        <RecipeForm onUpdate={this.addRecipe}/>
       </main>
       <Footer/>
     </section>
   }
 });
 
-var RecipeList = React.createClass({
-  render: function() {
-    return <aside className="recipleList">
-      <h1 className="center">List</h1>
-      <div className="row">
-        <div className=" col s12 m4 l4">
-          <Recipe/>
-        </div>
-      </div>
-    </aside>
-  }
-});
-
 var RecipeForm = React.createClass({
-  getInitialState: function() {
-    return {title: '', img: 'http://www.gaspars.com/assets/gaspar-recipe-box3.jpg?w=297', content: ''}
+  getInitialState: function () {
+    return {
+      title: '',
+      url: '',
+      content: ''
+    };
   },
-  onChange: function(key, e) {
-    console.log(key);
-    this.setState({key: e.target.value})
+  onChange: function(e) {
+    this.setState({[e.target.id]: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    this.props.onUpdate(this.state);
+    $('#modal1').closeModal();
+    this.setState({title: '', url:'', content:''});
   },
   render: function() {
-    return <aside>
-      <a className="modal-trigger waves-effect waves-light btn" href="#modal1">Add Recipe</a>
+    return <aside className="center-align">
+      <a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
+        <i className="material-icons">add</i>
+      </a>
       <div id="modal1" className="modal modal-fixed-footer">
         <div className="modal-content">
           <h4>Add Recipe</h4>
@@ -46,34 +54,86 @@ var RecipeForm = React.createClass({
               <div className="row">
                 <div className="input-field col s6">
                   <i className="material-icons prefix">label_outline</i>
-                  <input id="icon_prefix" type="text" className="validate" onChange={'title',
-                  this.onChange} value={this.state.title}/>
-                  <label htmlFor="icon_prefix">Recipe Title</label>
+                  <input id="title" type="text" className="validate" onChange={this.onChange} value={this.state.title}/>
+                  <label htmlFor="title">Recipe Title</label>
                 </div>
                 <div className="input-field col s6">
                   <i className="material-icons prefix">perm_media</i>
-                  <input id="icon_telephone" type="tel" className="validate" onChange={'img',
-                  this.onChange} value={this.state.url}/>
-                  <label htmlFor="icon_telephone">Recipe Image</label>
+                  <input id="url" type="text" className="validate" onChange={this.onChange} value={this.state.url}/>
+                  <label htmlFor="url">Recipe Image</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
                   <i className="material-icons prefix">mode_edit</i>
-                  <textarea id="icon_prefix2" className="materialize-textarea" onChange={'content',
-                  this.onChange} value={this.state.content}></textarea>
-                  <label htmlFor="icon_prefix2">Recipe</label>
+                  <textarea id="content" className="validate materialize-textarea" onChange={this.onChange} value={this.state.content}></textarea>
+                  <label htmlFor="content">Recipe</label>
                 </div>
               </div>
-              <button className="btn">Create</button>
+              <button className="btn waves-effect waves-light cyan lighten-1" type="submit" name="action">Create
+                <i className="material-icons right">send</i>
+              </button>
             </form>
           </div>
         </div>
         <div className="modal-footer">
-          <a className="modal-action modal-close waves-effect waves-green btn btn-flat ">Close</a>
+          <a className="modal-action modal-close waves-effect waves-green btn btn-flat">Close</a>
         </div>
       </div>
     </aside>
+  }
+});
+
+var RecipeList = React.createClass({
+  render: function() {
+    var del = this.props.onDelete;
+    var recipes = this.props.recipes.map(function (recipeData, index) {
+       return <Recipe id={index} recipe={recipeData} onDelete={del}/>;
+    });
+    
+    return <aside className="recipleList">
+      <h1 className="center">Recipes</h1>
+      <div className="row">
+          {recipes}
+      </div>
+    </aside>
+  }
+});
+
+var Recipe = React.createClass({
+  handleDelete: function () {
+    this.props.onDelete(this.props.id);
+  },
+  rawMarkup: function() {
+    var rawMarkup = marked(this.props.recipe.content, {sanitize: true});
+    return {__html: rawMarkup};
+  },
+  render: function() {
+    return <div className=" col s12 m6 l4">
+      <div className="card small">
+      <div className="card-image waves-effect waves-block waves-light">
+        <img className="activator" src={this.props.recipe.url}/>
+      </div>
+      <div className="card-content">
+        <span className="card-title activator grey-text text-darken-4">
+          {this.props.recipe.title}
+          <i className="material-icons right">more_vert</i>
+        </span>
+        <p className="center-align">
+          <a className="waves-effect waves-light btn blue">Edit</a>
+          &nbsp;
+          <a className="waves-effect waves-light btn red" onClick={this.handleDelete}>Delete</a>
+        </p>
+      </div>
+      <div className="card-reveal">
+        <span className="card-title grey-text text-darken-4">
+          {this.props.recipe.title}
+          <i className="material-icons right">close</i>
+        </span>
+        <div className="parsed flow-text" dangerouslySetInnerHTML={this.rawMarkup()}></div>
+      </div>
+    </div>
+    </div>
   }
 });
 
@@ -81,8 +141,8 @@ var Header = React.createClass({
   render: function() {
     return <header className="page-header center-align">
       <nav>
-        <div className="nav-wrapper">
-          <a href="#" className="brand-logo center">Recipe Box</a>
+        <div className="nav-wrapper light-blue darken-4">
+          <a className="brand-logo center">Recipe Box</a>
         </div>
       </nav>
     </header>
@@ -91,7 +151,7 @@ var Header = React.createClass({
 
 var Footer = React.createClass({
   render: function() {
-    return <footer className="page-footer center-align">
+    return <footer className="page-footer center-align light-blue darken-4">
       <div className="footer-copyright">
         <div className="container">
           Copyright &copy; Rafael J. Rodriguez 2016. All Rights Reserved
@@ -123,27 +183,6 @@ var Footer = React.createClass({
   }
 });
 
-var Recipe = React.createClass({
-  render: function() {
-    return <div className="card small">
-      <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src="http://materializecss.com/images/office.jpg"/>
-      </div>
-      <div className="card-content">
-        <span className="card-title activator grey-text text-darken-4">Card Title<i className="material-icons right">more_vert</i>
-        </span>
-        <p>
-          <a href="#">This is a link</a>
-        </p>
-      </div>
-      <div className="card-reveal">
-        <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i>
-        </span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
-    </div>
-  }
-});
 ReactDOM.render(
   <RecipeBox/>, document.getElementById('content'));
 
