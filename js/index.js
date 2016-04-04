@@ -323,13 +323,14 @@ var FooterCopyright = React.createClass({
             { className: 'footer-copyright' },
             React.createElement(
                 'div',
-                { className: 'container' },
-                'Copyright © Rafael J. Rodriguez 2016. All Rights Reserved',
+                { className: 'container center-align' },
+                'Copyright ©  ',
                 React.createElement(
                     'a',
-                    { className: 'grey-text text-lighten-4 right', href: 'http://rafase282.github.io/' },
-                    'Portfolio'
-                )
+                    { className: 'grey-text text-lighten-4', href: 'http://rafase282.github.io/' },
+                    'Rafael J. Rodriguez'
+                ),
+                '  2016. All Rights Reserved'
             )
         );
     }
