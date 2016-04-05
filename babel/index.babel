@@ -218,7 +218,8 @@ var Recipe = React.createClass({
         this.props.onDelete(this.props.id);
     },
     rawMarkup: function() {
-        var rawMarkup = marked(this.props.recipe.content, {sanitize: true});
+        var md = window.markdownit();
+        var rawMarkup = md.render(this.props.recipe.content);
         return {__html: rawMarkup};
     },
     render: function() {

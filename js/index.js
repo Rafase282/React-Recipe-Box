@@ -153,7 +153,7 @@ var FooterInfo = React.createClass({
                         'p', {
                             className: 'grey-text text-lighten-4'
                         },
-                        'This project is part of the React curriculum at ',
+                        'This project is part of the React curriculum at',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -162,7 +162,7 @@ var FooterInfo = React.createClass({
                             },
                             'FreeCodeCamp'
                         ),
-                        ', created and designed by ',
+                        ', created and designed by',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -171,7 +171,7 @@ var FooterInfo = React.createClass({
                             },
                             'Rafase282'
                         ),
-                        ' using ',
+                        'using',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -182,7 +182,6 @@ var FooterInfo = React.createClass({
                         ),
                         '.'
                     ),
-                    ' ',
                     React.createElement(
                         'p', {
                             className: 'grey-text text-lighten-4'
@@ -531,9 +530,8 @@ var Recipe = React.createClass({
         this.props.onDelete(this.props.id);
     },
     rawMarkup: function rawMarkup() {
-        var rawMarkup = marked(this.props.recipe.content, {
-            sanitize: true
-        });
+        var md = window.markdownit();
+        var rawMarkup = md.render(this.props.recipe.content);
         return {
             __html: rawMarkup
         };
