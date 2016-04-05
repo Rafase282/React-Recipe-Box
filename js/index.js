@@ -335,6 +335,11 @@ var RecipeForm = React.createClass({
             content: ''
         });
     },
+    componentWillRecieveProps: function componentWillRecieveProps(nextProps) {
+        if (nextProps.recipe) {
+            this.setState(nextProps.recipe);
+        }
+    },
     render: function render() {
         return React.createElement(
             'aside', {
@@ -529,6 +534,9 @@ var Recipe = React.createClass({
     handleDelete: function handleDelete() {
         this.props.onDelete(this.props.id);
     },
+    handleEdit: function handleEdit() {
+        this.props.onEdit(this.props.id, this.props.recipe);
+    },
     rawMarkup: function rawMarkup() {
         var md = window.markdownit();
         var rawMarkup = md.render(this.props.recipe.content);
@@ -576,7 +584,8 @@ var Recipe = React.createClass({
                         },
                         React.createElement(
                             'a', {
-                                className: 'waves-effect waves-light btn blue'
+                                className: 'waves-effect waves-light btn blue modal-trigger',
+                                href: '#modal1'
                             },
                             'Edit'
                         ),

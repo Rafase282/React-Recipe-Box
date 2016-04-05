@@ -1,46 +1,74 @@
 var RecipeBox = React.createClass({
     getInitialState: function() {
-        var PreviousData = localStorage.getItem('Rafase282_RecipesBox');
-        if (PreviousData === null) {
-            PreviousData = {
-                recipes: [
-                    {
-                        title: 'Quinoa with Asian Flavors',
-                        url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
-                        content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
-                    }, {
-                        title: 'Simple Lemon Herb Chicken',
-                        url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
-                        content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
-                    }, {
-                        title: 'Greek Zoodle Salad',
-                        url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
-                        content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
-                    }
-                ]
-            };
-            return PreviousData
+        return {
+            editRecipe: false,
+            recipes: [
+                {
+                    title: 'Quinoa with Asian Flavors',
+                    url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
+                    content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
+                }, {
+                    title: 'Simple Lemon Herb Chicken',
+                    url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
+                    content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
+                }, {
+                    title: 'Greek Zoodle Salad',
+                    url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
+                    content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
+                }
+            ]
         }
-        return JSON.parse(PreviousData);
+    },
+    componentWillMount: function() {
+        var PreviousData = JSON.parse(localStorage.getItem('Rafase282_RecipesBox'));
+        if (PreviousData) {
+            this.setState({recipes: PreviousData});
+        }
+    },
+    componentDidUpdate: function(prevProps, prevState) {
+        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(this.state.recipes));
+    },
+    componentDidMount: function() {
+        $('.modal-trigger').leanModal({
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            in_duration: 300, // Transition in duration
+            out_duration: 300, // Transition out duration
+            // ready: function() { alert('Ready'); }, // Callback for Modal open
+            complete: function() {
+                this.setState({editRecipe: false});
+            }.bind(this) // Callback for Modal close
+        });
     },
     addRecipe: function(newRecipe) {
-        var newState = Object.assign({}, this.state);
-        newState.recipes = newState.recipes.concat(newRecipe);
-        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(newState));
+        var newState = Object.assign({}, this.state, {editRecipe: false});
+        if (this.state.editRecipe) {
+            newState.recipes[this.state.editRecipe] = newRecipe;
+        } else {
+            newState.recipes = newState.recipes.concat(newRecipe);
+        }
+
         this.setState(newState);
     },
     delRecipe: function(index) {
         var newState = Object.assign({}, this.state);
         newState.recipes.splice(index, 1);
-        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(newState));
         this.setState(newState);
     },
+    showEdit: function(index) {
+        this.setState({editRecipe: index});
+    },
     render: function() {
+        var recipe = null;
+        if (this.state.editRecipe) {
+            recipe = Object.assign({}, this.state.recipes[this.state.editRecipe]);
+        }
+
         return <section className="container-fluid">
             <Header/>
             <main className="page-content">
-                <RecipeList recipes={this.state.recipes} onDelete={this.delRecipe}/>
-                <RecipeForm onUpdate={this.addRecipe}/>
+                <RecipeList recipes={this.state.recipes} onDelete={this.delRecipe} onEdit={this.showEdit}/>
+                <RecipeForm onUpdate={this.addRecipe} recipe={recipe} onEdit={this.addRecipe}/>
             </main>
             <Footer/>
         </section>
@@ -154,6 +182,11 @@ var RecipeForm = React.createClass({
         $('#modal1').closeModal();
         this.setState({title: '', url: '', content: ''});
     },
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.recipe) {
+            this.setState(nextProps.recipe);
+        }
+    },
     render: function() {
         return <aside className="center-align">
             <a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
@@ -201,8 +234,8 @@ var RecipeList = React.createClass({
     render: function() {
         var del = this.props.onDelete;
         var recipes = this.props.recipes.map(function(recipeData, index) {
-            return <Recipe key={index} id={index} recipe={recipeData} onDelete={del}/>;
-        });
+            return <Recipe key={index} id={index} recipe={recipeData} onEdit={this.props.onEdit} onDelete={del}/>;
+        }.bind(this));
 
         return <aside className="recipleList">
             <h1 className="center">Recipes</h1>
@@ -234,7 +267,9 @@ var Recipe = React.createClass({
                         <i className="material-icons right">more_vert</i>
                     </span>
                     <p className="center-align">
-                        <a className="waves-effect waves-light btn blue">Edit</a>
+                        <a className="waves-effect waves-light btn blue" href="#modal1" onClick={function() {
+                            this.props.onEdit(this.props.id)$('#modal1').openModal()
+                        }.bind(this)}>Edit</a>
                         &nbsp;
                         <a className="waves-effect waves-light btn red" onClick={this.handleDelete}>Delete</a>
                     </p>
@@ -253,8 +288,3 @@ var Recipe = React.createClass({
 
 ReactDOM.render(
     <RecipeBox/>, document.getElementById('content'));
-
-$(document).ready(function() {
-
-    $('.modal-trigger').leanModal();
-});
