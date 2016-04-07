@@ -4,40 +4,83 @@ var RecipeBox = React.createClass({
     displayName: 'RecipeBox',
 
     getInitialState: function getInitialState() {
-        var PreviousData = localStorage.getItem('Rafase282_RecipesBox');
-        if (PreviousData === null) {
-            PreviousData = {
-                recipes: [{
-                    title: 'Quinoa with Asian Flavors',
-                    url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
-                    content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
-                }, {
-                    title: 'Simple Lemon Herb Chicken',
-                    url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
-                    content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
-                }, {
-                    title: 'Greek Zoodle Salad',
-                    url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
-                    content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
-                }]
-            };
-            return PreviousData;
+        return {
+            editRecipe: false,
+            recipes: [{
+                title: 'Quinoa with Asian Flavors',
+                url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
+                content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
+            }, {
+                title: 'Simple Lemon Herb Chicken',
+                url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
+                content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
+            }, {
+                title: 'Greek Zoodle Salad',
+                url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
+                content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
+            }]
+        };
+    },
+    componentWillMount: function componentWillMount() {
+        var PreviousData = JSON.parse(localStorage.getItem('Rafase282_RecipesBox'));
+        if (PreviousData) {
+            this.setState({
+                recipes: PreviousData
+            });
         }
-        return JSON.parse(PreviousData);
+    },
+    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(this.state.recipes));
+    },
+    componentDidMount: function componentDidMount() {
+        $('.modal-trigger').leanModal({
+            dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            in_duration: 300, // Transition in duration
+            out_duration: 300 // Transition out duration
+        });
+    },
+    bindToModal: function bindToModal(elem) {
+        $(elem).leanModal({
+            dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            in_duration: 300, // Transition in duration
+            out_duration: 300, // Transition out duration
+            complete: function() {
+                    this.setState({
+                        editRecipe: false
+                    });
+                }.bind(this) // Callback for Modal close
+        });
     },
     addRecipe: function addRecipe(newRecipe) {
-        var newState = Object.assign({}, this.state);
-        newState.recipes = newState.recipes.concat(newRecipe);
-        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(newState));
+        var newState = Object.assign({}, this.state, {
+            editRecipe: false
+        });
+        if (this.state.editRecipe) {
+            newState.recipes[this.state.editRecipe] = newRecipe;
+        } else {
+            newState.recipes = newState.recipes.concat(newRecipe);
+        }
+
         this.setState(newState);
     },
     delRecipe: function delRecipe(index) {
         var newState = Object.assign({}, this.state);
         newState.recipes.splice(index, 1);
-        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(newState));
         this.setState(newState);
     },
+    showEdit: function showEdit(index) {
+        this.setState({
+            editRecipe: index
+        });
+    },
     render: function render() {
+        var recipe = null;
+        if (this.state.editRecipe) {
+            recipe = Object.assign({}, this.state.recipes[this.state.editRecipe]);
+        }
+
         return React.createElement(
             'section', {
                 className: 'container-fluid'
@@ -49,10 +92,14 @@ var RecipeBox = React.createClass({
                 },
                 React.createElement(RecipeList, {
                     recipes: this.state.recipes,
-                    onDelete: this.delRecipe
+                    onDelete: this.delRecipe,
+                    bindToModal: this.bindToModal,
+                    onEdit: this.showEdit
                 }),
                 React.createElement(RecipeForm, {
-                    onUpdate: this.addRecipe
+                    onUpdate: this.addRecipe,
+                    recipe: recipe,
+                    onEdit: this.addRecipe
                 })
             ),
             React.createElement(Footer, null)
@@ -153,7 +200,7 @@ var FooterInfo = React.createClass({
                         'p', {
                             className: 'grey-text text-lighten-4'
                         },
-                        'This project is part of the React curriculum at',
+                        'This project is part of the React curriculum at ',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -162,7 +209,7 @@ var FooterInfo = React.createClass({
                             },
                             'FreeCodeCamp'
                         ),
-                        ', created and designed by',
+                        ', created and designed by ',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -171,7 +218,7 @@ var FooterInfo = React.createClass({
                             },
                             'Rafase282'
                         ),
-                        'using',
+                        ' using ',
                         React.createElement(
                             'a', {
                                 className: 'grey-text',
@@ -186,7 +233,7 @@ var FooterInfo = React.createClass({
                         'p', {
                             className: 'grey-text text-lighten-4'
                         },
-                        'The site uses locl sotarage to keep changes in the client\'s cache. If you delete your browser\'s temp files then youw ill lose your recipes. The app is also useful for taking notes.'
+                        'The site uses local sotarage to keep changes in the client\'s cache. If you delete your browser\'s temp files then youw ill lose your recipes. The app is also useful for taking notes.'
                     )
                 ),
                 React.createElement(
@@ -317,7 +364,8 @@ var RecipeForm = React.createClass({
         return {
             title: '',
             url: '',
-            content: ''
+            content: '',
+            button: 'Create'
         };
     },
     onChange: function onChange(e) {
@@ -329,15 +377,16 @@ var RecipeForm = React.createClass({
         e.preventDefault();
         this.props.onUpdate(this.state);
         $('#modal1').closeModal();
-        this.setState({
-            title: '',
-            url: '',
-            content: ''
-        });
+        this.setState(this.getInitialState);
     },
-    componentWillRecieveProps: function componentWillRecieveProps(nextProps) {
+    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
         if (nextProps.recipe) {
             this.setState(nextProps.recipe);
+            this.setState({
+                button: 'Update'
+            });
+        } else {
+            this.setState(this.getInitialState);
         }
     },
     render: function render() {
@@ -467,7 +516,7 @@ var RecipeForm = React.createClass({
                                     type: 'submit',
                                     name: 'action'
                                 },
-                                'Create',
+                                this.state.button,
                                 React.createElement(
                                     'i', {
                                         className: 'material-icons right'
@@ -504,9 +553,11 @@ var RecipeList = React.createClass({
                 key: index,
                 id: index,
                 recipe: recipeData,
+                bindToModal: this.props.bindToModal,
+                onEdit: this.props.onEdit,
                 onDelete: del
             });
-        });
+        }.bind(this));
 
         return React.createElement(
             'aside', {
@@ -534,9 +585,10 @@ var Recipe = React.createClass({
     handleDelete: function handleDelete() {
         this.props.onDelete(this.props.id);
     },
-    handleEdit: function handleEdit() {
-        this.props.onEdit(this.props.id, this.props.recipe);
+    componentDidMount: function componentDidMount() {
+        this.props.bindToModal(this.refs._editButton);
     },
+
     rawMarkup: function rawMarkup() {
         var md = window.markdownit();
         var rawMarkup = md.render(this.props.recipe.content);
@@ -584,8 +636,12 @@ var Recipe = React.createClass({
                         },
                         React.createElement(
                             'a', {
-                                className: 'waves-effect waves-light btn blue modal-trigger',
-                                href: '#modal1'
+                                className: 'waves-effect waves-light btn blue',
+                                href: '#modal1',
+                                ref: '_editButton',
+                                onClick: function() {
+                                    this.props.onEdit(this.props.id);
+                                }.bind(this)
                             },
                             'Edit'
                         ),
@@ -626,8 +682,3 @@ var Recipe = React.createClass({
 });
 
 ReactDOM.render(React.createElement(RecipeBox, null), document.getElementById('content'));
-
-$(document).ready(function() {
-
-    $('.modal-trigger').leanModal();
-});
