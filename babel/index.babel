@@ -210,20 +210,20 @@ var RecipeForm = React.createClass({
                             <div className="row">
                                 <div className="input-field col s6">
                                     <i className="material-icons prefix">label_outline</i>
-                                    <input id="title" type="text" className="validate" onChange={this.onChange} value={this.state.title}/>
+                                    <input placeholder="Title" id="title" type="text" className="validate" onChange={this.onChange} value={this.state.title}/>
                                     <label htmlFor="title">Recipe Title</label>
                                 </div>
 
                                 <div className="input-field col s6">
                                     <i className="material-icons prefix">perm_media</i>
-                                    <input id="url" type="text" className="validate" onChange={this.onChange} value={this.state.url}/>
+                                    <input placeholder="Imgae direct URL" id="url" type="text" className="validate" onChange={this.onChange} value={this.state.url}/>
                                     <label htmlFor="url">Recipe Image</label>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col s12">
                                     <i className="material-icons prefix">mode_edit</i>
-                                    <textarea id="content" className="validate materialize-textarea" onChange={this.onChange} value={this.state.content}/>
+                                    <textarea placeholder="You can use markdown here" id="content" className="validate materialize-textarea" onChange={this.onChange} value={this.state.content}/>
                                     <label htmlFor="content">Recipe</label>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@ var Recipe = React.createClass({
     },
     render: function() {
         return <div className=" col s12 m6 l4">
-            <div className="card small">
+            <div className="card medium">
                 <div className="card-image waves-effect waves-block waves-light">
                     <img className="activator" src={this.props.recipe.url}/>
                 </div>

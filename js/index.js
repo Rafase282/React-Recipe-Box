@@ -444,6 +444,7 @@ var RecipeForm = React.createClass({
                                         'label_outline'
                                     ),
                                     React.createElement('input', {
+                                        placeholder: 'Title',
                                         id: 'title',
                                         type: 'text',
                                         className: 'validate',
@@ -468,6 +469,7 @@ var RecipeForm = React.createClass({
                                         'perm_media'
                                     ),
                                     React.createElement('input', {
+                                        placeholder: 'Imgae direct URL',
                                         id: 'url',
                                         type: 'text',
                                         className: 'validate',
@@ -497,6 +499,7 @@ var RecipeForm = React.createClass({
                                         'mode_edit'
                                     ),
                                     React.createElement('textarea', {
+                                        placeholder: 'You can use markdown here',
                                         id: 'content',
                                         className: 'validate materialize-textarea',
                                         onChange: this.onChange,
@@ -603,7 +606,7 @@ var Recipe = React.createClass({
             },
             React.createElement(
                 'div', {
-                    className: 'card small'
+                    className: 'card medium'
                 },
                 React.createElement(
                     'div', {
