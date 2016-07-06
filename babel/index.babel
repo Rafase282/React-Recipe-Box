@@ -279,7 +279,7 @@ var Recipe = React.createClass({
                 <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">
                         {this.props.recipe.title}
-                        <i className="material-icons right">more_vert</i>
+                        <i className="material-icons right">list</i>
                     </span>
                     <p className="center-align">
                         <a className="waves-effect waves-light btn blue" href="#modal1" ref='_editButton' onClick={function() {
