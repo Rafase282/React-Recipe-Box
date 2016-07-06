@@ -1,77 +1,83 @@
 var RecipeBox = React.createClass({
-    getInitialState: function() {
-        return {
-            editRecipe: false,
-            recipes: [
-                {
-                    title: 'Quinoa with Asian Flavors',
-                    url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
-                    content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
-                }, {
-                    title: 'Simple Lemon Herb Chicken',
-                    url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
-                    content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
-                }, {
-                    title: 'Greek Zoodle Salad',
-                    url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
-                    content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
-                }
-            ]
-        }
-    },
-    componentWillMount: function() {
-        var PreviousData = JSON.parse(localStorage.getItem('Rafase282_RecipesBox'));
-        if (PreviousData) {
-            this.setState({recipes: PreviousData});
-        }
-    },
-    componentDidUpdate: function(prevProps, prevState) {
-        localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(this.state.recipes));
-    },
-    componentDidMount: function() {
-        $('.modal-trigger').leanModal({
-            dismissible: false, // Modal can be dismissed by clicking outside of the modal
-            opacity: .5, // Opacity of modal background
-            in_duration: 300, // Transition in duration
-            out_duration: 300 // Transition out duration
-        });
-    },
-    bindToModal: function(elem) {
-        $(elem).leanModal({
-            dismissible: false, // Modal can be dismissed by clicking outside of the modal
-            opacity: .5, // Opacity of modal background
-            in_duration: 300, // Transition in duration
-            out_duration: 300, // Transition out duration
-            complete: function() {
-                this.setState({editRecipe: false});
-            }.bind(this) // Callback for Modal close
-        });
-    },
-    addRecipe: function(newRecipe) {
-        var newState = Object.assign({}, this.state, {editRecipe: false});
-        if (this.state.editRecipe) {
-            newState.recipes[this.state.editRecipe] = newRecipe;
-        } else {
-            newState.recipes = newState.recipes.concat(newRecipe);
-        }
+  getInitialState: function() {
+    return {
+      editRecipe: false,
+      recipes: [{
+        title: 'Quinoa with Asian Flavors',
+        url: 'http://images.media-allrecipes.com/userphotos/250x250/470894.jpg',
+        content: '## Ingridients\n * 1 tablespoon extra-virgin olive oil\n * 1 cup quinoa\n * 2 cups chicken broth\n * 2 tablespoons soy sauce\n * 1 tablespoon minced fresh ginger root\n * 1 clove garlic, minced\n## Directions\n Heat olive oil in a saucepan over medium heat. Stir in quinoa and allow to toast for 2 to 3 minutes, then add chicken broth, soy sauce, ginger and garlic. Increase heat and bring to a boil. Cover and reduce heat to low. Simmer until all liquid has been absorbed, 25 to 30 minutes. Fluff quinoa with fork and top with green onions before serving.'
+      }, {
+        title: 'Simple Lemon Herb Chicken',
+        url: 'http://images.media-allrecipes.com/userphotos/720x405/1889670.jpg',
+        content: '## Ingridients\n * 2 skinless, boneless chicken breast halves\n * 1 lemon\n * 1 tablespoon olive oil\n * 1 pinch dried oregano\n * 2 sprigs fresh parsley, for garnish\n## Directions\n Cut lemon in half, and squeeze juice from 1/2 lemon on chicken. Season with salt to taste. Let sit while you heat oil in a small skillet over medium low heat.When oil is hot, put chicken in skillet. As you saute chicken, add juice from other 1/2 lemon, pepper to taste, and oregano. Saute for 5 to 10 minutes each side, or until juices run clear. Serve with parsley for garnish.'
+      }, {
+        title: 'Greek Zoodle Salad',
+        url: 'http://images.media-allrecipes.com/userphotos/720x405/2171304.jpg',
+        content: '## Ingridients\n * 2 zucchini\n * 1/4 English cucumber, chopped\n * 10 cherry tomatoes, halved, or more to taste\n * 10 pitted kalamata olives, halved, or more to taste\n * 1/4 cup thinly sliced red onion\n * 2 ounces crumbled reduced-fat feta cheese\n * 2 tablespoons extra-virgin olive oil\n * 2 tablespoons fresh lemon juice\n * 1 teaspoon dried oregano\n * salt and ground black pepper to taste\n## Directions\n Cut zucchini into noodle-shaped strands using a spiralizing tool. Place "zoodles" in a large bowl and top with cucumber, tomatoes, olives, red onion, and feta cheese. Whisk olive oil, lemon juice, oregano, salt, and pepper together in a bowl until dressing is smooth; pour over "zoodle" mixture and toss to coat. Marinate salad in refrigerator for 10 to 15 minutes.'
+      }]
+    }
+  },
+  componentWillMount: function() {
+    var PreviousData = JSON.parse(localStorage.getItem('Rafase282_RecipesBox'));
+    if (PreviousData) {
+      this.setState({
+        recipes: PreviousData
+      });
+    }
+  },
+  componentDidUpdate: function(prevProps, prevState) {
+    localStorage.setItem('Rafase282_RecipesBox', JSON.stringify(this.state.recipes));
+  },
+  componentDidMount: function() {
+    $('.modal-trigger').leanModal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 300 // Transition out duration
+    });
+  },
+  bindToModal: function(elem) {
+    $(elem).leanModal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 300, // Transition out duration
+      complete: function() {
+          this.setState({
+            editRecipe: false
+          });
+        }.bind(this) // Callback for Modal close
+    });
+  },
+  addRecipe: function(newRecipe) {
+    var newState = Object.assign({}, this.state, {
+      editRecipe: false
+    });
+    if (this.state.editRecipe) {
+      newState.recipes[this.state.editRecipe] = newRecipe;
+    } else {
+      newState.recipes = newState.recipes.concat(newRecipe);
+    }
 
-        this.setState(newState);
-    },
-    delRecipe: function(index) {
-        var newState = Object.assign({}, this.state);
-        newState.recipes.splice(index, 1);
-        this.setState(newState);
-    },
-    showEdit: function(index) {
-        this.setState({editRecipe: index});
-    },
-    render: function() {
-        var recipe = null;
-        if (this.state.editRecipe) {
-            recipe = Object.assign({}, this.state.recipes[this.state.editRecipe]);
-        }
+    this.setState(newState);
+  },
+  delRecipe: function(index) {
+    var newState = Object.assign({}, this.state);
+    newState.recipes.splice(index, 1);
+    this.setState(newState);
+  },
+  showEdit: function(index) {
+    this.setState({
+      editRecipe: index
+    });
+  },
+  render: function() {
+    var recipe = null;
+    if (this.state.editRecipe) {
+      recipe = Object.assign({}, this.state.recipes[this.state.editRecipe]);
+    }
 
-        return <section className="container-fluid">
+    return <section className="container-fluid">
             <Header/>
             <main className="page-content">
                 <RecipeList recipes={this.state.recipes} onDelete={this.delRecipe} bindToModal={this.bindToModal} onEdit={this.showEdit}/>
@@ -79,45 +85,45 @@ var RecipeBox = React.createClass({
             </main>
             <Footer/>
         </section>
-    }
+  }
 });
 
 var Header = React.createClass({
-    render: function() {
-        return <header className="page-header center-align">
+  render: function() {
+    return <header className="page-header center-align">
             <nav>
                 <div className="nav-wrapper light-blue darken-4">
                     <a className="brand-logo center">Recipe Box</a>
                 </div>
             </nav>
         </header>
-    }
+  }
 });
 
 var Footer = React.createClass({
-    render: function() {
-        return <footer className="page-footer center-align light-blue darken-4">
+  render: function() {
+    return <footer className="page-footer center-align light-blue darken-4">
             <FooterInfo/>
             <FooterCopyright/>
         </footer>
-    }
+  }
 });
 
 var FooterCopyright = React.createClass({
-    render: function() {
-        return <div className="footer-copyright">
+  render: function() {
+    return <div className="footer-copyright">
             <div className="container center-align">
                 Copyright &copy; &nbsp;
                 <a className="grey-text text-lighten-4" href="http://rafase282.github.io/">Rafael J. Rodriguez</a>
                 &nbsp; 2016. All Rights Reserved
             </div>
         </div>
-    }
+  }
 });
 
 var FooterInfo = React.createClass({
-    render: function() {
-        return <div className="container">
+  render: function() {
+    return <div className="container">
             <div className="row">
                 <div className="col l6 s12">
                     <h5 className="white-text">About the Site</h5>
@@ -171,34 +177,41 @@ var FooterInfo = React.createClass({
                 </div>
             </div>
         </div>
-    }
+  }
 });
 
 var RecipeForm = React.createClass({
-    getInitialState: function() {
-        return {title: '', url: '', content: '', button: 'Create'};
-    },
-    onChange: function(e) {
-        this.setState({
-            [e.target.id]: e.target.value
-        });
-    },
-    handleSubmit: function(e) {
-        e.preventDefault();
-        this.props.onUpdate(this.state);
-        $('#modal1').closeModal();
-        this.setState(this.getInitialState);
-    },
-    componentWillReceiveProps: function(nextProps) {
-        if (nextProps.recipe) {
-            this.setState(nextProps.recipe);
-            this.setState({button: 'Update'})
-        } else {
-            this.setState(this.getInitialState);
-        }
-    },
-    render: function() {
-        return <aside className="center-align">
+  getInitialState: function() {
+    return {
+      title: '',
+      url: '',
+      content: '',
+      button: 'Create'
+    };
+  },
+  onChange: function(e) {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    this.props.onUpdate(this.state);
+    $('#modal1').closeModal();
+    this.setState(this.getInitialState);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.recipe) {
+      this.setState(nextProps.recipe);
+      this.setState({
+        button: 'Update'
+      })
+    } else {
+      this.setState(this.getInitialState);
+    }
+  },
+  render: function() {
+    return <aside className="center-align">
             <a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1">
                 <i className="material-icons">add</i>
             </a>
@@ -216,7 +229,7 @@ var RecipeForm = React.createClass({
 
                                 <div className="input-field col s6">
                                     <i className="material-icons prefix">perm_media</i>
-                                    <input placeholder="Imgae direct URL" id="url" type="text" className="validate" onChange={this.onChange} value={this.state.url}/>
+                                    <input placeholder="Imgae direct URL"id="url" type="text" className="validate" onChange={this.onChange} value={this.state.url}/>
                                     <label htmlFor="url">Recipe Image</label>
                                 </div>
                             </div>
@@ -239,42 +252,44 @@ var RecipeForm = React.createClass({
                 </div>
             </div>
         </aside>
-    }
+  }
 });
 
 var RecipeList = React.createClass({
-    render: function() {
-        var del = this.props.onDelete;
-        var recipes = this.props.recipes.map(function(recipeData, index) {
-            return <Recipe key={index} id={index} recipe={recipeData} bindToModal={this.props.bindToModal} onEdit={this.props.onEdit} onDelete={del}/>;
-        }.bind(this));
+  render: function() {
+    var del = this.props.onDelete;
+    var recipes = this.props.recipes.map(function(recipeData, index) {
+      return <Recipe key={index} id={index} recipe={recipeData} bindToModal={this.props.bindToModal} onEdit={this.props.onEdit} onDelete={del}/>;
+    }.bind(this));
 
-        return <aside className="recipleList">
+    return <aside className="recipleList">
             <h1 className="center">Recipes</h1>
             <div className="row">
                 {recipes}
             </div>
         </aside>
-    }
+  }
 });
 
 var Recipe = React.createClass({
-    handleDelete: function() {
-        this.props.onDelete(this.props.id);
-    },
-    componentDidMount() {
-        this.props.bindToModal(this.refs._editButton)
-    },
-    rawMarkup: function() {
-        var md = window.markdownit();
-        var rawMarkup = md.render(this.props.recipe.content);
-        return {__html: rawMarkup};
-    },
-    render: function() {
-        return <div className=" col s12 m6 l4">
+  handleDelete: function() {
+    this.props.onDelete(this.props.id);
+  },
+  componentDidMount() {
+    this.props.bindToModal(this.refs._editButton)
+  },
+  rawMarkup: function() {
+    var md = window.markdownit();
+    var rawMarkup = md.render(this.props.recipe.content);
+    return {
+      __html: rawMarkup
+    };
+  },
+  render: function() {
+    return <div className=" col s12 m6 l4">
             <div className="card medium">
                 <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src={this.props.recipe.url}/>
+                    <img className="photo activator" src={this.props.recipe.url}/>
                 </div>
                 <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">
@@ -298,8 +313,8 @@ var Recipe = React.createClass({
                 </div>
             </div>
         </div>
-    }
+  }
 });
 
 ReactDOM.render(
-    <RecipeBox/>, document.getElementById('content'));
+  <RecipeBox/>, document.getElementById('content'));

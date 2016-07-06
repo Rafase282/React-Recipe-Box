@@ -46,11 +46,11 @@ var RecipeBox = React.createClass({
             opacity: .5, // Opacity of modal background
             in_duration: 300, // Transition in duration
             out_duration: 300, // Transition out duration
-            complete: function() {
-                    this.setState({
-                        editRecipe: false
-                    });
-                }.bind(this) // Callback for Modal close
+            complete: function () {
+                this.setState({
+                    editRecipe: false
+                });
+            }.bind(this) // Callback for Modal close
         });
     },
     addRecipe: function addRecipe(newRecipe) {
@@ -82,25 +82,14 @@ var RecipeBox = React.createClass({
         }
 
         return React.createElement(
-            'section', {
-                className: 'container-fluid'
-            },
+            'section',
+            { className: 'container-fluid' },
             React.createElement(Header, null),
             React.createElement(
-                'main', {
-                    className: 'page-content'
-                },
-                React.createElement(RecipeList, {
-                    recipes: this.state.recipes,
-                    onDelete: this.delRecipe,
-                    bindToModal: this.bindToModal,
-                    onEdit: this.showEdit
-                }),
-                React.createElement(RecipeForm, {
-                    onUpdate: this.addRecipe,
-                    recipe: recipe,
-                    onEdit: this.addRecipe
-                })
+                'main',
+                { className: 'page-content' },
+                React.createElement(RecipeList, { recipes: this.state.recipes, onDelete: this.delRecipe, bindToModal: this.bindToModal, onEdit: this.showEdit }),
+                React.createElement(RecipeForm, { onUpdate: this.addRecipe, recipe: recipe, onEdit: this.addRecipe })
             ),
             React.createElement(Footer, null)
         );
@@ -112,20 +101,17 @@ var Header = React.createClass({
 
     render: function render() {
         return React.createElement(
-            'header', {
-                className: 'page-header center-align'
-            },
+            'header',
+            { className: 'page-header center-align' },
             React.createElement(
                 'nav',
                 null,
                 React.createElement(
-                    'div', {
-                        className: 'nav-wrapper light-blue darken-4'
-                    },
+                    'div',
+                    { className: 'nav-wrapper light-blue darken-4' },
                     React.createElement(
-                        'a', {
-                            className: 'brand-logo center'
-                        },
+                        'a',
+                        { className: 'brand-logo center' },
                         'Recipe Box'
                     )
                 )
@@ -139,9 +125,8 @@ var Footer = React.createClass({
 
     render: function render() {
         return React.createElement(
-            'footer', {
-                className: 'page-footer center-align light-blue darken-4'
-            },
+            'footer',
+            { className: 'page-footer center-align light-blue darken-4' },
             React.createElement(FooterInfo, null),
             React.createElement(FooterCopyright, null)
         );
@@ -153,19 +138,15 @@ var FooterCopyright = React.createClass({
 
     render: function render() {
         return React.createElement(
-            'div', {
-                className: 'footer-copyright'
-            },
+            'div',
+            { className: 'footer-copyright' },
             React.createElement(
-                'div', {
-                    className: 'container center-align'
-                },
+                'div',
+                { className: 'container center-align' },
                 'Copyright ©  ',
                 React.createElement(
-                    'a', {
-                        className: 'grey-text text-lighten-4',
-                        href: 'http://rafase282.github.io/'
-                    },
+                    'a',
+                    { className: 'grey-text text-lighten-4', href: 'http://rafase282.github.io/' },
                     'Rafael J. Rodriguez'
                 ),
                 '  2016. All Rights Reserved'
@@ -179,91 +160,69 @@ var FooterInfo = React.createClass({
 
     render: function render() {
         return React.createElement(
-            'div', {
-                className: 'container'
-            },
+            'div',
+            { className: 'container' },
             React.createElement(
-                'div', {
-                    className: 'row'
-                },
+                'div',
+                { className: 'row' },
                 React.createElement(
-                    'div', {
-                        className: 'col l6 s12'
-                    },
+                    'div',
+                    { className: 'col l6 s12' },
                     React.createElement(
-                        'h5', {
-                            className: 'white-text'
-                        },
+                        'h5',
+                        { className: 'white-text' },
                         'About the Site'
                     ),
                     React.createElement(
-                        'p', {
-                            className: 'grey-text text-lighten-4'
-                        },
+                        'p',
+                        { className: 'grey-text text-lighten-4' },
                         'This project is part of the React curriculum at ',
                         React.createElement(
-                            'a', {
-                                className: 'grey-text',
-                                href: 'http://freecodecamp.com',
-                                taget: '_blank'
-                            },
+                            'a',
+                            { className: 'grey-text', href: 'http://freecodecamp.com', taget: '_blank' },
                             'FreeCodeCamp'
                         ),
                         ', created and designed by ',
                         React.createElement(
-                            'a', {
-                                className: 'grey-text',
-                                href: 'https://gitter.im/Rafase282',
-                                taget: '_blank'
-                            },
+                            'a',
+                            { className: 'grey-text', href: 'https://gitter.im/Rafase282', taget: '_blank' },
                             'Rafase282'
                         ),
                         ' using ',
                         React.createElement(
-                            'a', {
-                                className: 'grey-text',
-                                href: 'http://materializecss.com/',
-                                taget: '_blank'
-                            },
+                            'a',
+                            { className: 'grey-text', href: 'http://materializecss.com/', taget: '_blank' },
                             'Materialize'
                         ),
                         '.'
                     ),
                     React.createElement(
-                        'p', {
-                            className: 'grey-text text-lighten-4'
-                        },
+                        'p',
+                        { className: 'grey-text text-lighten-4' },
                         'The site uses local sotarage to keep changes in the client\'s cache. If you delete your browser\'s temp files then youw ill lose your recipes. The app is also useful for taking notes.'
                     )
                 ),
                 React.createElement(
-                    'div', {
-                        className: 'col l4 offset-l2 s12'
-                    },
+                    'div',
+                    { className: 'col l4 offset-l2 s12' },
                     React.createElement(
-                        'h5', {
-                            className: 'white-text'
-                        },
+                        'h5',
+                        { className: 'white-text' },
                         'Contact Me'
                     ),
                     React.createElement(
-                        'div', {
-                            className: 'col s6'
-                        },
+                        'div',
+                        { className: 'col s6' },
                         React.createElement(
-                            'ul', {
-                                className: 'white-text'
-                            },
+                            'ul',
+                            { className: 'white-text' },
                             React.createElement(
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'mailto:rafase282@gmail.com'
-                                    },
-                                    React.createElement('i', {
-                                        className: 'fa fa-envelope fa-fw'
-                                    })
+                                    'a',
+                                    { href: 'mailto:rafase282@gmail.com' },
+                                    React.createElement('i', { className: 'fa fa-envelope fa-fw' })
                                 ),
                                 '  E-Mail'
                             ),
@@ -271,13 +230,9 @@ var FooterInfo = React.createClass({
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'https://github.com/Rafase282',
-                                        target: '_blank'
-                                    },
-                                    React.createElement('i', {
-                                        className: 'fa fa-github fa-fw'
-                                    })
+                                    'a',
+                                    { href: 'https://github.com/Rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-github fa-fw' })
                                 ),
                                 '  Github'
                             ),
@@ -285,37 +240,27 @@ var FooterInfo = React.createClass({
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'https://www.linkedin.com/in/rafase282',
-                                        target: '_blank'
-                                    },
-                                    React.createElement('i', {
-                                        className: 'fa fa-linkedin'
-                                    })
+                                    'a',
+                                    { href: 'https://www.linkedin.com/in/rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-linkedin' })
                                 ),
                                 '  LinkedIn'
                             )
                         )
                     ),
                     React.createElement(
-                        'div', {
-                            className: 'col s6'
-                        },
+                        'div',
+                        { className: 'col s6' },
                         React.createElement(
-                            'ul', {
-                                className: 'white-text'
-                            },
+                            'ul',
+                            { className: 'white-text' },
                             React.createElement(
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'http://codepen.io/Rafase282',
-                                        target: '_blank'
-                                    },
-                                    React.createElement('i', {
-                                        className: 'fa fa-codepen'
-                                    })
+                                    'a',
+                                    { href: 'http://codepen.io/Rafase282', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-codepen' })
                                 ),
                                 '  Codepen'
                             ),
@@ -323,13 +268,9 @@ var FooterInfo = React.createClass({
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'https://rafase282.wordpress.com/',
-                                        target: '_blank'
-                                    },
-                                    React.createElement('i', {
-                                        className: 'fa fa-wordpress'
-                                    })
+                                    'a',
+                                    { href: 'https://rafase282.wordpress.com/', target: '_blank' },
+                                    React.createElement('i', { className: 'fa fa-wordpress' })
                                 ),
                                 '  Wordpress'
                             ),
@@ -337,14 +278,10 @@ var FooterInfo = React.createClass({
                                 'li',
                                 null,
                                 React.createElement(
-                                    'a', {
-                                        href: 'http://www.freecodecamp.com/rafase282',
-                                        target: '_blank'
-                                    },
+                                    'a',
+                                    { href: 'http://www.freecodecamp.com/rafase282', target: '_blank' },
                                     '(',
-                                    React.createElement('i', {
-                                        className: 'fa fa-fire fa-fw'
-                                    }),
+                                    React.createElement('i', { className: 'fa fa-fire fa-fw' }),
                                     ')'
                                 ),
                                 '  FreeCodeCamp'
@@ -391,139 +328,94 @@ var RecipeForm = React.createClass({
     },
     render: function render() {
         return React.createElement(
-            'aside', {
-                className: 'center-align'
-            },
+            'aside',
+            { className: 'center-align' },
             React.createElement(
-                'a', {
-                    className: 'btn-floating btn-large waves-effect waves-light red modal-trigger',
-                    href: '#modal1'
-                },
+                'a',
+                { className: 'btn-floating btn-large waves-effect waves-light red modal-trigger', href: '#modal1' },
                 React.createElement(
-                    'i', {
-                        className: 'material-icons'
-                    },
+                    'i',
+                    { className: 'material-icons' },
                     'add'
                 )
             ),
             React.createElement(
-                'div', {
-                    id: 'modal1',
-                    className: 'modal modal-fixed-footer'
-                },
+                'div',
+                { id: 'modal1', className: 'modal modal-fixed-footer' },
                 React.createElement(
-                    'div', {
-                        className: 'modal-content'
-                    },
+                    'div',
+                    { className: 'modal-content' },
                     React.createElement(
                         'h4',
                         null,
                         'Add Recipe'
                     ),
                     React.createElement(
-                        'div', {
-                            className: 'row'
-                        },
+                        'div',
+                        { className: 'row' },
                         React.createElement(
-                            'form', {
-                                className: 'col s12',
-                                onSubmit: this.handleSubmit
-                            },
+                            'form',
+                            { className: 'col s12', onSubmit: this.handleSubmit },
                             React.createElement(
-                                'div', {
-                                    className: 'row'
-                                },
+                                'div',
+                                { className: 'row' },
                                 React.createElement(
-                                    'div', {
-                                        className: 'input-field col s6'
-                                    },
+                                    'div',
+                                    { className: 'input-field col s6' },
                                     React.createElement(
-                                        'i', {
-                                            className: 'material-icons prefix'
-                                        },
+                                        'i',
+                                        { className: 'material-icons prefix' },
                                         'label_outline'
                                     ),
-                                    React.createElement('input', {
-                                        placeholder: 'Title',
-                                        id: 'title',
-                                        type: 'text',
-                                        className: 'validate',
-                                        onChange: this.onChange,
-                                        value: this.state.title
-                                    }),
+                                    React.createElement('input', { placeholder: 'Title', id: 'title', type: 'text', className: 'validate', onChange: this.onChange, value: this.state.title }),
                                     React.createElement(
-                                        'label', {
-                                            htmlFor: 'title'
-                                        },
+                                        'label',
+                                        { htmlFor: 'title' },
                                         'Recipe Title'
                                     )
                                 ),
                                 React.createElement(
-                                    'div', {
-                                        className: 'input-field col s6'
-                                    },
+                                    'div',
+                                    { className: 'input-field col s6' },
                                     React.createElement(
-                                        'i', {
-                                            className: 'material-icons prefix'
-                                        },
+                                        'i',
+                                        { className: 'material-icons prefix' },
                                         'perm_media'
                                     ),
-                                    React.createElement('input', {
-                                        placeholder: 'Imgae direct URL',
-                                        id: 'url',
-                                        type: 'text',
-                                        className: 'validate',
-                                        onChange: this.onChange,
-                                        value: this.state.url
-                                    }),
+                                    React.createElement('input', { placeholder: 'Imgae direct URL', id: 'url', type: 'text', className: 'validate', onChange: this.onChange, value: this.state.url }),
                                     React.createElement(
-                                        'label', {
-                                            htmlFor: 'url'
-                                        },
+                                        'label',
+                                        { htmlFor: 'url' },
                                         'Recipe Image'
                                     )
                                 )
                             ),
                             React.createElement(
-                                'div', {
-                                    className: 'row'
-                                },
+                                'div',
+                                { className: 'row' },
                                 React.createElement(
-                                    'div', {
-                                        className: 'input-field col s12'
-                                    },
+                                    'div',
+                                    { className: 'input-field col s12' },
                                     React.createElement(
-                                        'i', {
-                                            className: 'material-icons prefix'
-                                        },
+                                        'i',
+                                        { className: 'material-icons prefix' },
                                         'mode_edit'
                                     ),
-                                    React.createElement('textarea', {
-                                        placeholder: 'You can use markdown here',
-                                        id: 'content',
-                                        className: 'validate materialize-textarea',
-                                        onChange: this.onChange,
-                                        value: this.state.content
-                                    }),
+                                    React.createElement('textarea', { placeholder: 'You can use markdown here', id: 'content', className: 'validate materialize-textarea', onChange: this.onChange, value: this.state.content }),
                                     React.createElement(
-                                        'label', {
-                                            htmlFor: 'content'
-                                        },
+                                        'label',
+                                        { htmlFor: 'content' },
                                         'Recipe'
                                     )
                                 )
                             ),
                             React.createElement(
-                                'button', {
-                                    className: 'btn waves-effect waves-light cyan lighten-1',
-                                    type: 'submit',
-                                    name: 'action'
-                                },
+                                'button',
+                                { className: 'btn waves-effect waves-light cyan lighten-1', type: 'submit', name: 'action' },
                                 this.state.button,
                                 React.createElement(
-                                    'i', {
-                                        className: 'material-icons right'
-                                    },
+                                    'i',
+                                    { className: 'material-icons right' },
                                     'send'
                                 )
                             )
@@ -531,13 +423,11 @@ var RecipeForm = React.createClass({
                     )
                 ),
                 React.createElement(
-                    'div', {
-                        className: 'modal-footer'
-                    },
+                    'div',
+                    { className: 'modal-footer' },
                     React.createElement(
-                        'a', {
-                            className: 'modal-action modal-close waves-effect waves-green btn btn-flat'
-                        },
+                        'a',
+                        { className: 'modal-action modal-close waves-effect waves-green btn btn-flat' },
                         'Close'
                     )
                 )
@@ -551,31 +441,21 @@ var RecipeList = React.createClass({
 
     render: function render() {
         var del = this.props.onDelete;
-        var recipes = this.props.recipes.map(function(recipeData, index) {
-            return React.createElement(Recipe, {
-                key: index,
-                id: index,
-                recipe: recipeData,
-                bindToModal: this.props.bindToModal,
-                onEdit: this.props.onEdit,
-                onDelete: del
-            });
+        var recipes = this.props.recipes.map(function (recipeData, index) {
+            return React.createElement(Recipe, { key: index, id: index, recipe: recipeData, bindToModal: this.props.bindToModal, onEdit: this.props.onEdit, onDelete: del });
         }.bind(this));
 
         return React.createElement(
-            'aside', {
-                className: 'recipleList'
-            },
+            'aside',
+            { className: 'recipleList' },
             React.createElement(
-                'h1', {
-                    className: 'center'
-                },
+                'h1',
+                { className: 'center' },
                 'Recipes'
             ),
             React.createElement(
-                'div', {
-                    className: 'row'
-                },
+                'div',
+                { className: 'row' },
                 recipes
             )
         );
@@ -601,83 +481,61 @@ var Recipe = React.createClass({
     },
     render: function render() {
         return React.createElement(
-            'div', {
-                className: ' col s12 m6 l4'
-            },
+            'div',
+            { className: ' col s12 m6 l4' },
             React.createElement(
-                'div', {
-                    className: 'card medium'
-                },
+                'div',
+                { className: 'card medium' },
                 React.createElement(
-                    'div', {
-                        className: 'card-image waves-effect waves-block waves-light'
-                    },
-                    React.createElement('img', {
-                        className: 'activator',
-                        src: this.props.recipe.url
-                    })
+                    'div',
+                    { className: 'card-image waves-effect waves-block waves-light' },
+                    React.createElement('img', { className: 'photo activator', src: this.props.recipe.url })
                 ),
                 React.createElement(
-                    'div', {
-                        className: 'card-content'
-                    },
+                    'div',
+                    { className: 'card-content' },
                     React.createElement(
-                        'span', {
-                            className: 'card-title activator grey-text text-darken-4'
-                        },
+                        'span',
+                        { className: 'card-title activator grey-text text-darken-4' },
                         this.props.recipe.title,
                         React.createElement(
-                            'i', {
-                                className: 'material-icons right'
-                            },
+                            'i',
+                            { className: 'material-icons right' },
                             'list'
                         )
                     ),
                     React.createElement(
-                        'p', {
-                            className: 'center-align'
-                        },
+                        'p',
+                        { className: 'center-align' },
                         React.createElement(
-                            'a', {
-                                className: 'waves-effect waves-light btn blue',
-                                href: '#modal1',
-                                ref: '_editButton',
-                                onClick: function() {
+                            'a',
+                            { className: 'waves-effect waves-light btn blue', href: '#modal1', ref: '_editButton', onClick: function () {
                                     this.props.onEdit(this.props.id);
-                                }.bind(this)
-                            },
+                                }.bind(this) },
                             'Edit'
                         ),
                         ' ',
                         React.createElement(
-                            'a', {
-                                className: 'waves-effect waves-light btn red',
-                                onClick: this.handleDelete
-                            },
+                            'a',
+                            { className: 'waves-effect waves-light btn red', onClick: this.handleDelete },
                             'Delete'
                         )
                     )
                 ),
                 React.createElement(
-                    'div', {
-                        className: 'card-reveal'
-                    },
+                    'div',
+                    { className: 'card-reveal' },
                     React.createElement(
-                        'span', {
-                            className: 'card-title grey-text text-darken-4'
-                        },
+                        'span',
+                        { className: 'card-title grey-text text-darken-4' },
                         this.props.recipe.title,
                         React.createElement(
-                            'i', {
-                                className: 'material-icons right'
-                            },
+                            'i',
+                            { className: 'material-icons right' },
                             'close'
                         )
                     ),
-                    React.createElement('div', {
-                        className: 'parsed flow-text',
-                        dangerouslySetInnerHTML: this.rawMarkup()
-                    })
+                    React.createElement('div', { className: 'parsed flow-text', dangerouslySetInnerHTML: this.rawMarkup() })
                 )
             )
         );
