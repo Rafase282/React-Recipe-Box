@@ -630,7 +630,7 @@ var Recipe = React.createClass({
                             'i', {
                                 className: 'material-icons right'
                             },
-                            'more_vert'
+                            'list'
                         )
                     ),
                     React.createElement(
