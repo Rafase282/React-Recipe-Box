@@ -35,6 +35,34 @@ var RecipeBox = React.createClass({
       in_duration: 300, // Transition in duration
       out_duration: 300 // Transition out duration
     });
+    // Reveal car content on hover by @sorinr 
+    $('.hover-card').mouseenter(function(e) {
+      $(e.target).closest('.card').css('overflow', 'hidden');
+      $(this).find('.card-reveal').css({
+        display: 'block'
+      }).velocity("stop", false).velocity({
+        translateY: '-100%'
+      }, {
+        duration: 300,
+        queue: false,
+        easing: 'easeInOutQuad'
+      });
+
+    }).mouseleave(function(e) {
+      // Make Reveal animate down and display none
+      $(this).find('.card-reveal').velocity({
+        translateY: 0
+      }, {
+        duration: 225,
+        queue: false,
+        easing: 'easeInOutQuad',
+        complete: function() {
+          $(this).css({
+            display: 'none'
+          });
+        }
+      });
+    });
   },
   bindToModal: function(elem) {
     $(elem).leanModal({
@@ -287,7 +315,7 @@ var Recipe = React.createClass({
   },
   render: function() {
     return <div className=" col s12 m6 l4">
-            <div className="card medium">
+            <div className="card medium hover-card">
                 <div className="card-image waves-effect waves-block waves-light">
                     <img className="photo activator" src={this.props.recipe.url}/>
                 </div>
