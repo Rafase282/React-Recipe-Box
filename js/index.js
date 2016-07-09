@@ -530,23 +530,23 @@ var Recipe = React.createClass({
               { className: 'material-icons right' },
               'list'
             )
-          ),
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'card-action center-align' },
           React.createElement(
-            'p',
-            { className: 'center-align' },
-            React.createElement(
-              'a',
-              { className: 'waves-effect waves-light btn blue', href: '#modal1', ref: '_editButton', onClick: function () {
-                  this.props.onEdit(this.props.id);
-                }.bind(this) },
-              'Edit'
-            ),
-            ' ',
-            React.createElement(
-              'a',
-              { className: 'waves-effect waves-light btn red', onClick: this.handleDelete },
-              'Delete'
-            )
+            'a',
+            { className: 'waves-effect waves-light btn blue', href: '#modal1', ref: '_editButton', onClick: function () {
+                this.props.onEdit(this.props.id);
+              }.bind(this) },
+            'Edit'
+          ),
+          ' ',
+          React.createElement(
+            'a',
+            { className: 'waves-effect waves-light btn red', onClick: this.handleDelete },
+            'Delete'
           )
         ),
         React.createElement(

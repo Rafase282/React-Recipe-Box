@@ -314,8 +314,8 @@ var Recipe = React.createClass({
     };
   },
   render: function() {
-    return <div className=" col s12 m6 l4">
-            <div className="card medium hover-card">
+    return (<div className=" col s12 m6 l4">
+              <div className="card medium hover-card">
                 <div className="card-image waves-effect waves-block waves-light">
                     <img className="photo activator" src={this.props.recipe.url}/>
                 </div>
@@ -324,13 +324,13 @@ var Recipe = React.createClass({
                         {this.props.recipe.title}
                         <i className="material-icons right">list</i>
                     </span>
-                    <p className="center-align">
+                </div>
+                <div className="card-action center-align">
                         <a className="waves-effect waves-light btn blue" href="#modal1" ref='_editButton' onClick={function() {
                             this.props.onEdit(this.props.id)
                         }.bind(this)}>Edit</a>
                         &nbsp;
                         <a className="waves-effect waves-light btn red" onClick={this.handleDelete}>Delete</a>
-                    </p>
                 </div>
                 <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">
@@ -340,7 +340,7 @@ var Recipe = React.createClass({
                     <div className="parsed flow-text" dangerouslySetInnerHTML={this.rawMarkup()}></div>
                 </div>
             </div>
-        </div>
+            </div>)
   }
 });
 
